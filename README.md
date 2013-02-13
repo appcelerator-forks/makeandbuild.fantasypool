@@ -19,21 +19,24 @@ see the LICENSE file for the full license.
 
 
 
-to create an app
+### to create an app
 
-```titanium create --name=fantasypool --id=com.ehirelabs.fantasypool --platform=android,ipad,iphone,mobileweb --android=/opt/android-sdk/
+```
+titanium create --name=fantasypool --id=com.ehirelabs.fantasypool --platform=android,ipad,iphone,mobileweb --android=/opt/android-sdk/
 cd appname
 alloy new
 ```
 
-to run an app
+### to run an app
 
-```titanium run --platform=iphone
+```
+titanium run --platform=iphone
 ```
 
-to run tests
+### to run tests
 
-```sudo npm install -g jake
+```
+sudo npm install -g jake
 sudo npm install -g colors
 sudo npm install -g wrench
 sudo npm install -g jsonlint
