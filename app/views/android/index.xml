@@ -7,6 +7,5 @@
       <ScrollView id="scroll" dataCollection="player">
         <Require src="entry"/>
       </ScrollView>
-      <!-- <Require type="widget" src="com.appcelerator.drawer" id="drawer"/> -->
     </Window>
 </Alloy>

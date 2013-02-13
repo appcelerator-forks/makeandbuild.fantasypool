@@ -2,11 +2,10 @@
     <Collection src="player"/>
     <Window>
         <NavigationGroup platform="ios,mobileweb">
-            <Window title="Player" onOpen="IndexOpen">
+            <Window title="Player">
               <RightNavButton>
                 <Button onClick="addPlayer">add player</Button>
               </RightNavButton>
-              <!-- <ScrollView id="scroll" dataCollection="player" dataTransform="doTransform"> -->
               <ScrollView id="scroll" dataCollection="player">
                 <Require src="entry"/>
               </ScrollView>

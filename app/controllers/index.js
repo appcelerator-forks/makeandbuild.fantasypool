@@ -2,11 +2,6 @@ function addPlayer() {
   Alloy.createController('add').getView().open();
 }
 
-
-// function IndexOpen(e) {
-//     $.logo.init({ image: '/images/alloy.png', width: 216, height: 200 });
-// }
-
 if (OS_IOS) {
   // Initialize the drawer with our buttons
   $.drawer.init({
