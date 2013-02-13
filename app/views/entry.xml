@@ -1,0 +1,7 @@
+<Alloy>
+    <View id="container">
+        <Label id="name" text="{name}"/>
+        <Label id="position" text="{position}"/>
+        <Label id="team" text="{team}"/>
+    </View>
+</Alloy>

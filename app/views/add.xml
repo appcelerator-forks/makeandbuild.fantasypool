@@ -1,0 +1,17 @@
+<Alloy>
+  	<Window id="addWin" title="Add Player" modal="true">
+    	<TextField id="name" hintText="player name" />
+      <!-- <TextField id="position" hintText="entry position" /> -->
+    	<TextField id="team" hintText="team name" />
+    	<Picker id="position">
+    		<Row title="QB"/>
+    		<Row title="RB"/>
+    		<Row title="WR"/>
+    		<Row title="TE"/>
+    		<Row title="K"/>
+    	</Picker>
+
+    	<Button class="button" onClick="addEntry">Add</Button>
+    	<Button class="button" onClick="closeWindow">Cancel</Button>
+  	</Window>
+</Alloy>
