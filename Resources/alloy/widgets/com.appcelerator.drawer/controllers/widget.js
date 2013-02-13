@@ -1,6 +1,6 @@
 function WPATH(s) {
     var index = s.lastIndexOf("/"), path = index === -1 ? "com.appcelerator.drawer/" + s : s.substring(0, index) + "/com.appcelerator.drawer/" + s.substring(index + 1);
-    return path;
+    return path.indexOf("/") !== 0 ? "/" + path : path;
 }
 
 function Controller() {
@@ -78,7 +78,7 @@ function Controller() {
     $._params = {};
     $._annoy = !1;
     exports.jiggle = function DrawerJiggle() {
-        if ($._isOpen || 0) return;
+        if ($._isOpen || !$._params.overrideMenu) return;
         var animation = require("alloy/animation"), chain = [ Ti.UI.createAnimation({
             bottom: -($._params.iconSize + $._params.gutter * 2) + DRAWER_PULLTAB_HEIGHT,
             duration: 250
@@ -92,7 +92,7 @@ function Controller() {
         animation.chainAnimate($.drawer, chain);
     };
     exports.checkEnabled = function DrawerCheckEnabled() {
-        Object.keys($._buttons).forEach(function(key) {
+        $._params.overrideMenu && Object.keys($._buttons).forEach(function(key) {
             var i = parseInt(key, 10);
             $._buttons[i].enabled && ($._buttons[i].button.enabled = $._buttons[i].enabled());
         });
@@ -100,31 +100,54 @@ function Controller() {
     exports.init = function DrawerInit(args) {
         $._buttons = args.buttons;
         $._params = _.defaults(args, defaults);
-        $.buttonbar.height = $._params.iconSize + $._params.gutter * 2;
-        $.drawer.height = DRAWER_PULLTAB_HEIGHT + $.buttonbar.height;
-        $.drawer.bottom = -$.buttonbar.height;
-        Object.keys($._buttons).forEach(function(key) {
-            var i = parseInt(key, 10), buttonDesc = omit($._buttons[i], [ "id", "title", "click", "enabled" ]);
-            _.extend(buttonDesc, {
-                top: $._params.gutter,
-                left: $._params.gutter,
-                width: $._params.iconSize,
-                height: $._params.iconSize,
-                backgroundImage: "/images/" + $._buttons[i].id + "Enabled.png",
-                backgroundDisabledImage: "/images/" + $._buttons[i].id + "Disabled.png"
+        if ($._params.overrideMenu) {
+            $.buttonbar.height = $._params.iconSize + $._params.gutter * 2;
+            $.drawer.height = DRAWER_PULLTAB_HEIGHT + $.buttonbar.height;
+            $.drawer.bottom = -$.buttonbar.height;
+            Object.keys($._buttons).forEach(function(key) {
+                var i = parseInt(key, 10), buttonDesc = omit($._buttons[i], [ "id", "title", "click", "enabled" ]);
+                _.extend(buttonDesc, {
+                    top: $._params.gutter,
+                    left: $._params.gutter,
+                    width: $._params.iconSize,
+                    height: $._params.iconSize,
+                    backgroundImage: "/images/" + $._buttons[i].id + "Enabled.png",
+                    backgroundDisabledImage: "/images/" + $._buttons[i].id + "Disabled.png"
+                });
+                $._buttons[i].button = Ti.UI.createButton(buttonDesc);
+                $._buttons[i].button.addEventListener("click", function(e) {
+                    $._buttons[i].click && $._buttons[i].click(e);
+                    $._params.autoClose && pullTabClick(e);
+                });
+                $.buttonbar.add($._buttons[i].button);
             });
-            $._buttons[i].button = Ti.UI.createButton(buttonDesc);
-            $._buttons[i].button.addEventListener("click", function(e) {
-                $._buttons[i].click && $._buttons[i].click(e);
-                $._params.autoClose && pullTabClick(e);
-            });
-            $.buttonbar.add($._buttons[i].button);
-        });
-        $._params.annoy && ($._annoy = setInterval(function DrawerAnnoy() {
-            $._params.annoy > 0 && $._params.annoy--;
-            $._params.annoy == 0 && clearInterval($._annoy);
-            $.jiggle();
-        }, 2000));
+            $._params.annoy && ($._annoy = setInterval(function DrawerAnnoy() {
+                $._params.annoy > 0 && $._params.annoy--;
+                $._params.annoy == 0 && clearInterval($._annoy);
+                $.jiggle();
+            }, 2000));
+        } else if (!$._params.overrideMenu) {
+            $.drawer.visible = !1;
+            var activity = $._params.mainWindow.activity;
+            activity.onCreateOptionsMenu = function(e) {
+                var menu = e.menu;
+                Object.keys($._buttons).forEach(function(key) {
+                    var i = parseInt(key, 10), menuItem = menu.add({
+                        title: $._buttons[i].title,
+                        itemId: i
+                    });
+                    menuItem.setIcon("/images/" + $._buttons[i].id + "Enabled.png");
+                    $._buttons[i].click && menuItem.addEventListener("click", $._buttons[i].click);
+                });
+            };
+            activity.onPrepareOptionsMenu = function(e) {
+                var menu = e.menu;
+                Object.keys($._buttons).forEach(function(key) {
+                    var i = parseInt(key, 10), menuItem = menu.findItem(i);
+                    menuItem.enabled = $._buttons[i].enabled ? $._buttons[i].enabled() : !0;
+                });
+            };
+        }
     };
     __defers["$.__views.pulltab!click!pullTabClick"] && $.__views.pulltab.on("click", pullTabClick);
     _.extend($, exports);

@@ -27,11 +27,23 @@ cd appname
 alloy new
 ```
 
-### to run an app
+### to run an app on iphone simulator
 
 ```
-alloy run --platform=iphone
-alloy run --platform=android --target=device
+alloy run . iphone
+```
+
+### to run on android simulator
+
+ * first start your AVD 
+ * make sure you set your $ANDROID_SDK to an appropriate value
+ * uninstall the app
+ * run android
+
+```
+export ANDROID_SDK=/opt/android
+adb uninstall -e com.ehirelabs.fantasypool
+alloy run . android
 ```
 
 ### to run tests

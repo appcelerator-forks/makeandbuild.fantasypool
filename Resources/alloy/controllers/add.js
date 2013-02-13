@@ -38,6 +38,7 @@ function Controller() {
         width: "90%",
         top: "10dp",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        keyboardType: Ti.UI.KEYBOARD_ASCII,
         id: "name",
         hintText: "player name"
     }), "TextField", $.__views.addWin);
@@ -45,6 +46,7 @@ function Controller() {
     $.__views.team = A$(Ti.UI.createTextField({
         width: "90%",
         top: "10p",
+        keyboardType: Ti.UI.KEYBOARD_ASCII,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         returnKeyType: Ti.UI.RETURNKEY_NEXT,
         id: "team",

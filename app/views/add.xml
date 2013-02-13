@@ -1,7 +1,6 @@
 <Alloy>
   	<Window id="addWin" title="Add Player" modal="true">
     	<TextField id="name" hintText="player name" />
-      <!-- <TextField id="position" hintText="entry position" /> -->
     	<TextField id="team" hintText="team name" />
     	<Picker id="position">
     		<Row title="QB"/>
