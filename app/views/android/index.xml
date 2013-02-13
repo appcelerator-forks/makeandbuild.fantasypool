@@ -1,0 +1,13 @@
+<Alloy>
+    <Collection src="player"/>
+            <Window title="Player" onOpen="IndexOpen">
+              <RightNavButton>
+                <Button onClick="addPlayer">add player</Button>
+              </RightNavButton>
+              <!-- <ScrollView id="scroll" dataCollection="player" dataTransform="doTransform"> -->
+              <ScrollView id="scroll" dataCollection="player">
+                <Require src="entry"/>
+              </ScrollView>
+              <Require type="widget" src="com.appcelerator.drawer" id="drawer"/>
+            </Window>
+</Alloy>

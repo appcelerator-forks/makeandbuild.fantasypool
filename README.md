@@ -22,7 +22,7 @@ see the LICENSE file for the full license.
 ### to create an app
 
 ```
-titanium create --name=fantasypool --id=com.ehirelabs.fantasypool --platform=android,ipad,iphone,mobileweb --android=/opt/android-sdk/
+titanium create --name=fantasypool --id=com.ehirelabs.fantasypool --platforms=android,ipad,iphone --workspace-dir=.
 cd appname
 alloy new
 ```
@@ -30,7 +30,8 @@ alloy new
 ### to run an app
 
 ```
-titanium run --platform=iphone
+alloy run --platform=iphone
+alloy run --platform=android --target=device
 ```
 
 ### to run tests
