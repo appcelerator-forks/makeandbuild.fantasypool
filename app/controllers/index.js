@@ -1,24 +1,22 @@
-function addPlayer() {
-  Alloy.createController('add').getView().open();
+function doClick(e) {
+    alert($.label.text);
 }
-
-if (OS_IOS) {
-  // Initialize the drawer with our buttons
-  $.drawer.init({
-      mainWindow: $.index,
-      buttons: [
-          { id: 'One', title: 'Scores', click: function (e) { alert("Scores"); }, enabled: function (e) { return false; } },
-          { id: 'Two', title: 'Trades',  click: function (e) { alert("Trades"); } },    
-          { id: 'Three', title: 'Lineups',  click: function (e) { alert("Lineups"); } }    
-      ], 
-      autoClose: true,
-      gutter: 5,
-      overrideMenu: false, // Set to true to see the drawer vs the activity menu
-      annoy: true
-  });
-  $.drawer.checkEnabled();
-}
-
-Alloy.Collections.player.fetch();
+var webservice = require("webservice");
+webservice.on("login", function() {
+	console.log("logged in delivered");
+})
+$.signin.addEventListener('click', function() {
+	webservice.login({
+		username: $.username.value,
+		password: $.password.value
+	}, function(err){
+		if (err){
+			alert(err);
+		} else {
+			console.log('logged in callback');
+			Alloy.createController("players").getView().open();
+		}
+	});
+});
 
 $.index.open();

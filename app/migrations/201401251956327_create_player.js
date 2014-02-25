@@ -13,7 +13,7 @@ migration.up = function(migrator) {
         }
     });
   Ti.API.info('created table');
-  for (var i = 0; i < preload_data.length; i++) { 
+  for (var i = 0; i < preload_data.length; i++) {
           migrator.insertRow(preload_data[i]);
       }
       Ti.API.info('inserted data');

@@ -1,5 +1,6 @@
 "#addWin":{
-	layout: 'vertical'
+	layout: 'vertical',
+	top: 30
 },
 "#team":{
 	width: '90%',

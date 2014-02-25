@@ -1,16 +1,8 @@
 <Alloy>
-    <Collection src="player"/>
-    <Window>
-        <NavigationGroup platform="ios,mobileweb">
-            <Window title="Player">
-              <RightNavButton>
-                <Button onClick="addPlayer">add player</Button>
-              </RightNavButton>
-              <ScrollView id="scroll" dataCollection="player">
-                <Require src="entry"/>
-              </ScrollView>
-              <Require type="widget" src="com.appcelerator.drawer" id="drawer"/>
-            </Window>
-        </NavigationGroup>
-    </Window>
+	<Window class="container">
+		<Label id="label" onClick="doClick">Hello, World</Label>
+		<TextField id="username" hintText="username"/>
+		<TextField id="password" hintText="password"/>
+		<Button id="signin" title="Sign IN"/>
+	</Window>
 </Alloy>

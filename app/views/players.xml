@@ -1,0 +1,13 @@
+<Alloy>
+	<Collection src="player"/>
+	<NavigationWindow id="nav" platform="ios,mobileweb">
+		<Window title="Player">
+			<RightNavButton>
+				<Button onClick="addPlayer">add player</Button>
+			</RightNavButton>
+			<ScrollView dataCollection="player" id="scroll">
+				<Require src="entry"/>
+			</ScrollView>
+		</Window>
+	</NavigationWindow>
+</Alloy>

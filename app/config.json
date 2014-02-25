@@ -3,9 +3,9 @@
 	"env:development": {}, 
 	"env:test": {}, 
 	"env:production": {}, 
-	"os:ios": {}, 
-	"os:android": {}, 
-	"dependencies": {
-    "com.appcelerator.drawer":"1.0"
-	}
+	"os:android": {},
+	"os:blackberry": {},
+	"os:ios": {},
+	"os:mobileweb": {},
+	"dependencies": {}
 }
